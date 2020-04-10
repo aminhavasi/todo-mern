@@ -1,0 +1,10 @@
+.main {
+    min-height: 100vh;
+    display: flex;
+    background-color: #777;
+    justify-content: center;
+}
+.borderC {
+    border-left: 6px solid red;
+    background-color: lightgrey;
+}
