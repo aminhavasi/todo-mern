@@ -1,11 +1,12 @@
 import { clearWork } from './work';
 
-export const addWorks = (name) => {
+export const addWorks = (name, status) => {
     return async (dispatch, getState) => {
         const works = [...getState().works];
         const work = {
             id: Math.floor(Math.random() * 1000),
             name,
+            status,
         };
 
         if (work.name.trim() !== '') {
