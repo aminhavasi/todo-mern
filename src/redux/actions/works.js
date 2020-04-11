@@ -23,3 +23,15 @@ export const deleteWork = (workId) => {
         await dispatch({ type: 'DELETE_WORK', payload: filterdWorks });
     };
 };
+
+export const updateWork = (event, workId) => {
+    return async (dispatch, getState) => {
+        const allWorks = [...getState().works];
+        const workIndex = allWorks.findIndex((p) => p.id === workId);
+        const work = allWorks[workIndex];
+        work.name = event.target.value;
+        const works = [...allWorks];
+        works[workIndex] = work;
+        await dispatch({ type: 'UPDATE_WORK', payload: works });
+    };
+};
