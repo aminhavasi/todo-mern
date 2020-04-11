@@ -15,3 +15,11 @@ export const addWorks = (name) => {
         }
     };
 };
+
+export const deleteWork = (workId) => {
+    return async (dispatch, getState) => {
+        const works = [...getState().works];
+        const filterdWorks = works.filter((p) => p.id !== workId);
+        await dispatch({ type: 'DELETE_WORK', payload: filterdWorks });
+    };
+};
