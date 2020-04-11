@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setWork } from './../redux/actions/work';
 import './../css/style.css';
-import { addWorks } from '../redux/actions/works';
+import { addWorks, deleteWork } from '../redux/actions/works';
 import { show } from './../redux/actions/showEvents';
 const handleSubmit = (e) => {
     e.preventDefault();
@@ -62,10 +62,12 @@ const Todo = () => {
                               <p style={{ float: 'right' }}>{w.name}</p>
                               <a>status</a>
                               <i
+                                  onClick={() => dispatch(deleteWork(w.id))}
                                   className="fa fa-trash"
                                   style={{
                                       float: 'left',
                                       fontSize: '25px',
+                                      cursor: 'pointer',
                                   }}
                               ></i>
                           </div>
