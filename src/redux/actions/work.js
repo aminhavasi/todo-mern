@@ -9,3 +9,8 @@ export const clearWork = () => {
         await dispatch({ type: 'CLEAR_WORK', payload: '' });
     };
 };
+export const radiobox = (status) => {
+    return async (dispatch) => {
+        await dispatch({ type: 'RADIO', payload: status });
+    };
+};
