@@ -1,16 +1,22 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setWork } from './../redux/actions/work';
+import { setWork, radiobox } from './../redux/actions/work';
 import './../css/style.css';
 import { addWorks, deleteWork, updateWork } from '../redux/actions/works';
 import { show } from './../redux/actions/showEvents';
 const handleSubmit = (e) => {
     e.preventDefault();
 };
+
+const handle = (e) => {
+    const result = document.querySelector('input[type="radio"]:checked');
+    console.log(result.value);
+};
 const Todo = () => {
     const work = useSelector((state) => state.work);
     const works = useSelector((state) => state.works);
     const showEvent = useSelector((state) => state.showEvent);
+    const statusx = useSelector((state) => state.radio);
     const dispatch = useDispatch();
     let count = 1;
     return (
@@ -41,11 +47,46 @@ const Todo = () => {
                         onChange={(e) => dispatch(setWork(e))}
                         value={work}
                     />
+                    <div
+                        style={{ display: 'flex' }}
+                        onChange={(e) =>
+                            dispatch(
+                                radiobox(
+                                    document.querySelector(
+                                        'input[type="radio"]:checked'
+                                    ).value
+                                )
+                            )
+                        }
+                    >
+                        <div class="form-check mx-1">
+                            <label class="form-check-label">
+                                <input
+                                    type="radio"
+                                    class="form-check-input"
+                                    name="optradio"
+                                    value="normal"
+                                />
+                                Normal
+                            </label>
+                        </div>
+                        <div class="form-check mx-1">
+                            <label class="form-check-label">
+                                <input
+                                    type="radio"
+                                    class="form-check-input"
+                                    name="optradio"
+                                    value="important"
+                                />
+                                Importent
+                            </label>
+                        </div>
+                    </div>
 
                     <button
                         type="submit"
                         class="btn btn-primary mb-2"
-                        onClick={() => dispatch(addWorks(work))}
+                        onClick={() => dispatch(addWorks(work, statusx))}
                     >
                         Submit
                     </button>
@@ -54,7 +95,11 @@ const Todo = () => {
             {showEvent
                 ? works.map((w) => (
                       <div
-                          class="card bg-primary text-white text-center borderC"
+                          className={
+                              w.status !== 'normal'
+                                  ? 'card bg-primary text-white text-center borderC'
+                                  : 'card bg-primary text-white text-center BB'
+                          }
                           key={w.id}
                       >
                           <div class="card-body ">
@@ -68,7 +113,7 @@ const Todo = () => {
                                       dispatch(updateWork(e, w.id))
                                   }
                               />
-                              <a>status</a>
+                              <a>waiting</a>
                               <i
                                   onClick={() => dispatch(deleteWork(w.id))}
                                   className="fa fa-trash"
