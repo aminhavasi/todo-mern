@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setWork } from './../redux/actions/work';
 import './../css/style.css';
-import { addWorks, deleteWork } from '../redux/actions/works';
+import { addWorks, deleteWork, updateWork } from '../redux/actions/works';
 import { show } from './../redux/actions/showEvents';
 const handleSubmit = (e) => {
     e.preventDefault();
@@ -59,7 +59,15 @@ const Todo = () => {
                       >
                           <div class="card-body ">
                               <p style={{ float: 'right' }}>{`:${count++}`}</p>
-                              <p style={{ float: 'right' }}>{w.name}</p>
+                              <input
+                                  type="text"
+                                  className="form-control w-25"
+                                  style={{ float: 'right' }}
+                                  placeholder={w.name}
+                                  onChange={(e) =>
+                                      dispatch(updateWork(e, w.id))
+                                  }
+                              />
                               <a>status</a>
                               <i
                                   onClick={() => dispatch(deleteWork(w.id))}
