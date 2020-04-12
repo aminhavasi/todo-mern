@@ -133,7 +133,7 @@ const Todo = () => {
                     style={{ width: '25%' }}
                     onClick={() => dispatch(show())}
                 >
-                    show/hide
+                    show
                 </button>
             </div>
         </div>
