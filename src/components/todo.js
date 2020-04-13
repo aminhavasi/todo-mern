@@ -113,6 +113,7 @@ const Todo = () => {
                                       dispatch(updateWork(e, w.id))
                                   }
                               />
+                              {/**resolve this problem in tommorow and dispatch project */}
                               <a>waiting</a>
                               <i
                                   onClick={() => dispatch(deleteWork(w.id))}
